@@ -2,6 +2,7 @@ import { DOCUMENT } from '@angular/common';
 import { Component, Inject, OnInit } from '@angular/core';
 import games from 'src/app/constants/games';
 import { FirebaseService } from 'src/app/services/firebase.service';
+import { v4 as uuid } from 'uuid';
 
 @Component({
   selector: 'app-find-animal-game',
@@ -81,13 +82,28 @@ export class FindAnimalGameComponent implements OnInit {
       animalPic.style.opacity = '1';
       document.querySelector('audio').pause();
       this.endTime = new Date().getTime();
-      const timeNeeded = this.endTime - this.startTime;
+      const timeNeeded = (this.endTime - this.startTime) / 1000;
 
-      let top5 = this.firebaseService
-        .getTop5(games.SOUND_ORIGINAL_GAME)
-        .subscribe((snapshot) => console.log(snapshot.data().scoreboard));
+      this.getAndPossiblySetTop5('testPlayerName', timeNeeded);
     };
   }
+
+  getAndPossiblySetTop5 = (playerName, timeNeeded) => {
+    this.firebaseService
+      .getTop5(games.SOUND_ORIGINAL_GAME)
+      .subscribe((snapshot) => {
+        let top5 = snapshot.data().namesAndTimes;
+        top5.push({ name: playerName, time: timeNeeded });
+        top5.sort((x, y) => (x.time > y.time ? 1 : -1));
+
+        if (top5[5].time !== timeNeeded) {
+          this.firebaseService.setNewTop5(
+            top5.slice(0, 5),
+            games.SOUND_ORIGINAL_GAME
+          );
+        }
+      });
+  };
 
   ngOnDestroy() {
     document.onmousemove = (event) => {};
