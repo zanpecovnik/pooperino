@@ -1,0 +1,20 @@
+.popup {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 30%;
+  height: 500px;
+  margin-top: 100px;
+  background-color: olivedrab;
+  border-radius: 20px;
+  border: 3px solid green;
+}
+
+.play_btn {
+  border-radius: 5px;
+  border: 3px solid brown;
+  background-color: yellow;
+  color: brown;
+  font-size: 30px;
+  padding: 15px;
+}
