@@ -6,14 +6,14 @@
 
 .left {
   height: 100%;
-  width: 60%;
+  width: 80%;
   position: fixed;
   z-index: 1;
   top: 0;
   overflow-x: hidden;
   padding-top: 20px;
   left: 0;
-  background-image: url(../../../assets/gifi/rozice.gif);
+  background-image: url(../../../assets/gifi/zivali_poop.gif);
   background-repeat: no-repeat;
 }
 
@@ -31,6 +31,9 @@
   background-size: cover;
 }
 
+.pooperino {
+  width: 500px;
+}
 .gameName {
   color: brown;
   font-weight: bold;
