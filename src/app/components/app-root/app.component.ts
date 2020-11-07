@@ -63,7 +63,7 @@ export class AppComponent {
 
     this.firebaseService
       .getTop5(games.SOUND_ORIGINAL_GAME)
-      .subscribe((snapshot) => console.log(snapshot.data().namesAndTimes));
+      .subscribe((snapshot) => console.log(snapshot.data().scoreboard));
 
     this.firebaseService.setNewTop5(
       [
@@ -93,7 +93,7 @@ export class AppComponent {
 
     this.firebaseService
       .getTop5(games.MATCH_SOUND_GAME)
-      .subscribe((snapshot) => console.log(snapshot.data().namesAndTimes));
+      .subscribe((snapshot) => console.log(snapshot.data().scoreboard));
 
     this.firebaseService.setNewTop5(
       [
@@ -123,7 +123,7 @@ export class AppComponent {
 
     this.firebaseService
       .getTop5(games.MATCH_POOP_GAME)
-      .subscribe((snapshot) => console.log(snapshot.data().namesAndTimes));
+      .subscribe((snapshot) => console.log(snapshot.data().scoreboard));
       */
   }
 }

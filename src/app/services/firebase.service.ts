@@ -26,7 +26,7 @@ export class FirebaseService {
       .collection(collections.TOP5)
       .doc(whichGame)
       .set({
-        namesAndTimes: newTop5,
+        scoreboard: newTop5,
       })
       .then(() => newTop5);
   };
