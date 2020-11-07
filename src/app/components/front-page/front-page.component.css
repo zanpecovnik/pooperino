@@ -83,3 +83,7 @@
   background-color: palegoldenrod;
   cursor: pointer;
 }
+
+.game_btn:active {
+  outline: none;
+}
