@@ -92,7 +92,7 @@ export class FindAnimalGameComponent implements OnInit {
     this.firebaseService
       .getTop5(games.SOUND_ORIGINAL_GAME)
       .subscribe((snapshot) => {
-        let top5 = snapshot.data().namesAndTimes;
+        let top5 = snapshot.data().scoreboard;
         top5.push({ name: playerName, time: timeNeeded });
         top5.sort((x, y) => (x.time > y.time ? 1 : -1));
 
