@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { AppComponent } from './components/app-root/app.component';
 
 import { FrontPageComponent } from './components/front-page/front-page.component';
 import { StartGamePopupComponent } from './components/start-game-popup/start-game-popup.component';
@@ -8,7 +7,7 @@ import { StartGamePopupComponent } from './components/start-game-popup/start-gam
 const routes: Routes = [
   {
     path: '',
-    component: AppComponent,
+    component: FrontPageComponent,
   },
   {
     path: 'setup',
