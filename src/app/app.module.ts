@@ -9,9 +9,15 @@ import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { environment } from '../environments/environment';
 import { FrontPageComponent } from './components/front-page/front-page.component';
 import { StartGamePopupComponent } from './components/start-game-popup/start-game-popup.component';
+import { FindAnimalGameComponent } from './components/find-animal-game/find-animal-game.component';
 
 @NgModule({
-  declarations: [AppComponent, FrontPageComponent, StartGamePopupComponent],
+  declarations: [
+    AppComponent,
+    FrontPageComponent,
+    StartGamePopupComponent,
+    FindAnimalGameComponent,
+  ],
   imports: [
     BrowserModule,
     AppRoutingModule,
