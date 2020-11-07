@@ -2,7 +2,7 @@ import { DOCUMENT } from '@angular/common';
 import { Component, Inject, OnInit } from '@angular/core';
 import games from 'src/app/constants/games';
 import { FirebaseService } from 'src/app/services/firebase.service';
-import { v4 as uuid } from 'uuid';
+// import { v4 as uuid } from 'uuid';
 
 @Component({
   selector: 'app-find-animal-game',
@@ -14,6 +14,8 @@ export class FindAnimalGameComponent implements OnInit {
   currentIndex = 0;
   startTime;
   endTime;
+  interval;
+  currentTimePassed = 0;
   animals = [
     'cat',
     'chicken',
@@ -34,6 +36,7 @@ export class FindAnimalGameComponent implements OnInit {
 
   ngOnInit(): void {
     this.startTime = new Date().getTime();
+    this.startCounting();
     this.animals = this.shuffleArray(this.animals);
     let animalName = this.animals[0];
     this.animalPath = `${animalName}/${animalName}`;
@@ -85,7 +88,19 @@ export class FindAnimalGameComponent implements OnInit {
       const timeNeeded = (this.endTime - this.startTime) / 1000;
 
       this.getAndPossiblySetTop5('testPlayerName', timeNeeded);
+
+      this.stopCounting();
     };
+  }
+
+  startCounting() {
+    this.interval = setInterval(() => {
+      this.currentTimePassed++;
+    }, 100);
+  }
+
+  stopCounting() {
+    clearInterval(this.interval);
   }
 
   getAndPossiblySetTop5 = (playerName, timeNeeded) => {
