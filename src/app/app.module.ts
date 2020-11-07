@@ -7,9 +7,11 @@ import { AppComponent } from './components/app-root/app.component';
 import { AngularFireModule } from '@angular/fire';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { environment } from '../environments/environment';
+import { FrontPageComponent } from './components/front-page/front-page.component';
+import { StartGamePopupComponent } from './components/start-game-popup/start-game-popup.component';
 
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [AppComponent, FrontPageComponent, StartGamePopupComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
