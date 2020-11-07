@@ -11,6 +11,7 @@ import { FrontPageComponent } from './components/front-page/front-page.component
 import { StartGamePopupComponent } from './components/start-game-popup/start-game-popup.component';
 import { FindAnimalGameComponent } from './components/find-animal-game/find-animal-game.component';
 import { FindAnimalBySoundGameComponent } from './components/find-animal-by-sound-game/find-animal-by-sound-game.component';
+import { FindAnimalByPoopComponent } from './components/find-animal-by-poop/find-animal-by-poop.component';
 
 @NgModule({
   declarations: [
@@ -19,6 +20,7 @@ import { FindAnimalBySoundGameComponent } from './components/find-animal-by-soun
     StartGamePopupComponent,
     FindAnimalGameComponent,
     FindAnimalBySoundGameComponent,
+    FindAnimalByPoopComponent,
   ],
   imports: [
     BrowserModule,
