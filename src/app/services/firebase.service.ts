@@ -75,7 +75,6 @@ export class FirebaseService {
    */
   getLiveGame = (gameId) => {
     return this.db.collection(collections.LIVEGAMES).doc(gameId).get();
-    // .subscribe((snapshot) => console.log(snapshot.data()));
   };
 
   /**
