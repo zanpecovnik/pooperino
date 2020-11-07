@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { v4 as uuid } from 'uuid';
 import collections from 'src/app/constants/collections';
-import { merge } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -11,20 +10,21 @@ export class FirebaseService {
   constructor(private db: AngularFirestore) {}
 
   /**
-   * Vrne zadevo, na katero se subscribaš in ti potem vrne array najboljših 5
+   * Vrne zadevo, na katero se subscribaš in ti potem vrne lestvico najboljših 5
+   * @param whichGame je string, ki pove od katero igre vrne lestvico najboljših 5
    */
-  getTop5 = () => {
-    return this.db.collection(collections.TOP5).doc('top5').get();
+  getTop5 = (whichGame) => {
+    return this.db.collection(collections.TOP5).doc(whichGame).get();
   };
 
   /**
-   * Nastavi novih najboljših 5 in jih potem vrne
+   * Nastavi lestvico novih najboljših 5 in jih potem vrne
    * @param newTop5 je array objektov oblike {name: "xyz", time: 20.1}
    */
-  setNewTop5 = (newTop5) => {
+  setNewTop5 = (newTop5, whichGame) => {
     return this.db
       .collection(collections.TOP5)
-      .doc('top5')
+      .doc(whichGame)
       .set({
         namesAndTimes: newTop5,
       })
@@ -35,12 +35,13 @@ export class FirebaseService {
    * Ustvari novo live igro, nastavi prvega igralca in vrne gameId
    * @param player1 je string, ki predstavlja ime prvega igralca
    */
-  createNewLiveGame = (player1) => {
+  createNewLiveGame = (player1, whichGame) => {
     const gameId = uuid();
     this.db.collection(collections.LIVEGAMES).doc(gameId).set({
       player1Name: player1,
       player2Name: '',
       winner: '',
+      game: whichGame,
     });
     return gameId;
   };
@@ -73,7 +74,7 @@ export class FirebaseService {
    * Vrne zadevo na katero se lahko subscribaš in ti vrne imena obeh igralcev in ime zmagovalca
    * @param gameId je UUID, ki predstavlja ID igre
    */
-  getLiveGame = (gameId) => {
+  getGame = (gameId) => {
     return this.db.collection(collections.LIVEGAMES).doc(gameId).get();
   };
 

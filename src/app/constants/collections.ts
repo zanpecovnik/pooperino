@@ -1,5 +1,5 @@
 const collections = {
-  TOP5: 'pooperino',
+  TOP5: 'top5players',
   LIVEGAMES: 'livegames',
 };
 
