@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
-import { v4 as uuid } from 'uuid';
 import collections from 'src/app/constants/collections';
 
 @Injectable({
@@ -11,20 +10,21 @@ export class FirebaseService {
 
   /**
    * Vrne zadevo, na katero se subscribaš in ti potem vrne lestvico najboljših 5
-   * @param whichGame je string, ki pove od katero igre vrne lestvico najboljših 5
+   * @param gameType je string, ki pove od katere igre vrne lestvico najboljših 5
    */
-  getTop5 = (whichGame) => {
-    return this.db.collection(collections.TOP5).doc(whichGame).get();
+  getTop5 = (gameType) => {
+    return this.db.collection(collections.TOP5).doc(gameType).get();
   };
 
   /**
    * Nastavi lestvico novih najboljših 5 in jih potem vrne
    * @param newTop5 je array objektov oblike {name: "xyz", time: 20.1}
+   * @param gameType je string, ki kateri igri nastavi lestvico najboljših 5
    */
-  setNewTop5 = (newTop5, whichGame) => {
+  setNewTop5 = (newTop5, gameType) => {
     return this.db
       .collection(collections.TOP5)
-      .doc(whichGame)
+      .doc(gameType)
       .set({
         scoreboard: newTop5,
       })
@@ -35,8 +35,7 @@ export class FirebaseService {
    * Ustvari novo live igro, nastavi prvega igralca in vrne gameId
    * @param player1 je string, ki predstavlja ime prvega igralca
    */
-  createNewLiveGame = (player1, whichGame) => {
-    const gameId = uuid();
+  createNewLiveGame = (player1, whichGame, gameId) => {
     this.db.collection(collections.LIVEGAMES).doc(gameId).set({
       player1Name: player1,
       player2Name: '',
