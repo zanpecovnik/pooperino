@@ -7,6 +7,15 @@
     content:url("../../../assets/pig/pig-gif.gif");
 }
 
+.wrong {
+  left: 50%;
+  position: absolute;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  visibility: hidden;
+  transition: all 0.3s ease-out;
+}
+
 .animal-padding{
     padding: 50px;
 }
@@ -78,7 +87,8 @@
   }
 
   .game_btn {
-    padding-left:20px;
+    margin-top: 30px;
+    margin-right:30px;
     letter-spacing: 3px;
     font-weight: bold;
     font-size: 16px;

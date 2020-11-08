@@ -34,9 +34,9 @@
   color: #742716;
   font-size: 24px;
   letter-spacing: 2px;
-  padding-top: 20px;
+  padding-top: 40px;
   width: 30%;
-  height: 40%;
+  height: 30%;
   text-align: center;
   transform: translate(-50%, -50%);
   background-color: #b8666a;
@@ -66,6 +66,7 @@
   transform: translate(-50%, -50%);
   visibility: hidden;
   transition: all 0.3s ease;
+  background: none;
 }
 
 .timeCounter {

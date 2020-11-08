@@ -3,7 +3,7 @@ import { DOCUMENT } from '@angular/common';
 import { FirebaseService } from 'src/app/services/firebase.service';
 import * as $ from 'jquery';
 import games from 'src/app/constants/games';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-find-animal-by-poop',
@@ -44,8 +44,7 @@ export class FindAnimalByPoopComponent implements OnInit {
   constructor(
     @Inject(DOCUMENT) document,
     private firebaseService: FirebaseService,
-    private route: ActivatedRoute,
-    private router: Router
+    private route: ActivatedRoute
   ) {}
 
   ngOnInit(): void {
@@ -65,7 +64,6 @@ export class FindAnimalByPoopComponent implements OnInit {
     setTimeout(this.changeCssStylesAfter5s, 5000);
 
     const clickHandler = function () {
-      console.log(this.animal);
       $(`.${this.animal}`).addClass('changeAnimal');
       nextPoop();
     };
@@ -74,20 +72,14 @@ export class FindAnimalByPoopComponent implements OnInit {
       this.correct += 1;
 
       var element = document.querySelector(`.${this.animal}`);
-      console.log('Prev anial is: ' + this.animal);
-      //var element = document.getElementsByClassName(`.${animal}`);
       element.removeEventListener('click', clickHandler);
 
       if (this.correct < this.counter) {
-        console.log(this.correct);
-        var animalPoop = Math.floor(Math.random() * this.poops.length);
+        animalPoop = Math.floor(Math.random() * this.poops.length);
         this.animalPoopPath = `${this.poops[animalPoop]}/${this.poops[animalPoop]}`;
 
         this.animal = `${this.poops[animalPoop]}`;
-        console.log('animal is: ' + this.animal);
-        var element = document.querySelector(`.${this.animal}`);
-        console.log(element);
-        //var element = document.getElementsByClassName(`.${animal}`);
+        element = document.querySelector(`.${this.animal}`);
 
         if (this.animal === 'cat' || this.animal === 'sheep') {
           this.poop_box_img.src = `../../../assets/${this.animalPoopPath}-poop.png`;
@@ -112,7 +104,6 @@ export class FindAnimalByPoopComponent implements OnInit {
     };
 
     var animalPoop = Math.floor(Math.random() * this.poops.length);
-    console.log(animalPoop);
 
     this.animalPoopPath = `${this.poops[animalPoop]}/${this.poops[animalPoop]}`;
 
@@ -166,27 +157,12 @@ export class FindAnimalByPoopComponent implements OnInit {
       if (this.currentTimePassed > 600) {
         this.stopCounting();
         this.wrong.style.visibility = 'visible';
-        setTimeout(() => (this.end_game = true), 3000);
       }
     }, 100);
   }
 
   stopCounting() {
     clearInterval(this.interval);
-  }
-
-  exitGame() {
-    console.log('Exit game');
-    this.router.navigate(['/']);
-  }
-
-  playAgain() {
-    console.log('Play again');
-    this.currentTimePassed = 0;
-    this.end_game = false;
-    this.correct = 0;
-    this.wrong.style.visibility = 'hidden';
-    this.ngOnInit();
   }
 
   shuffleArray = (array) => {
