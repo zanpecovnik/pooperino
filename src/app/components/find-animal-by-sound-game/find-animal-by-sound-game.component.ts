@@ -1,9 +1,4 @@
-import {
-  Component,
-  Inject,
-  OnInit,
-  SystemJsNgModuleLoader,
-} from '@angular/core';
+import { Component, Inject, OnInit, ElementRef } from '@angular/core';
 import { FirebaseService } from 'src/app/services/firebase.service';
 import * as $ from 'jquery';
 import { nextTick } from 'process';
@@ -15,16 +10,20 @@ import { DOCUMENT } from '@angular/common';
   styleUrls: ['./find-animal-by-sound-game.component.css'],
 })
 export class FindAnimalBySoundGameComponent implements OnInit {
-  constructor(
-    @Inject(DOCUMENT) document,
-    private firebaseService: FirebaseService
-  ) {}
 
-  public animals: String[];
+  constructor(@Inject(DOCUMENT) document,
+  private firebaseService: FirebaseService,
+  private elRef: ElementRef) {}
+
+  public animals : String[];
   animalPath: string;
   startTime;
+  endTime;
+  interval;
   counter = 10;
-  correct = 0;
+  correct = 1;
+  animal = "";
+  currentTimePassed = 0;
 
   ngOnInit(): void {
     console.log('Starting');
@@ -42,32 +41,72 @@ export class FindAnimalBySoundGameComponent implements OnInit {
       'elephant',
     ];
 
-    const nextAnimal = () => {
-      console.log('im here');
+    this.startTime = new Date().getTime();
+    this.startCounting();
+
+    const clickHandler = function() {
+      console.log(this.animal);
+      document.querySelector('audio').pause();
+      $(`.${this.animal}`).addClass('changeAnimal');
+      this.correct = nextAnimal();
     };
 
-    $(document).ready(function () {
-      this.startTime = new Date().getTime();
-      console.log(this.startTime);
+    const nextAnimal = () => {
+      console.log(this.correct, this.animal);
+      this.correct += 1;
 
-      var animalSound = Math.floor(Math.random() * animals.length);
-      console.log(animalSound);
+      var element = document.querySelector(`.${this.animal}`);
+      console.log("Prev anial is: " + this.animal);
+      //var element = document.getElementsByClassName(`.${animal}`);
+      element.removeEventListener('click', clickHandler);
 
-      this.animalPath = `${animals[animalSound]}/${animals[animalSound]}`;
-      document.querySelector(
-        'audio'
-      ).src = `../../../assets/${this.animalPath}.mp3`;
+      if (this.correct < this.counter){
+        console.log(this.correct);
+        var animalSound = Math.floor(Math.random() * animals.length);
+        this.animalPath = `${animals[animalSound]}/${animals[animalSound]}`;
+        document.querySelector(
+          'audio'
+        ).src = `../../../assets/${this.animalPath}.mp3`;
 
-      var animal = `${animals[animalSound]}`;
-      console.log(animal);
+        this.animal = `${animals[animalSound]}`;
+        console.log("animal is: " + this.animal);
+        var element = document.querySelector(`.${this.animal}`);
+        console.log(element);
+        //var element = document.getElementsByClassName(`.${animal}`);
+        element.addEventListener('click', clickHandler);
+      } else {
+        console.log("End game");
+        this.endTime = new Date().getTime();
+        this.stopCounting();
+        console.log("Needed time:", this.endTime - this.startTime);
+      }
+    };
 
-      $(`.${animal}`).click(function () {
-        this.correct += 1;
-        console.log(animal);
-        document.querySelector('audio').pause();
-        console.log('dela');
-        nextAnimal();
-      });
-    });
+
+    var animalSound = Math.floor(Math.random() * animals.length);
+    console.log(animalSound);
+
+    this.animalPath = `${animals[animalSound]}/${animals[animalSound]}`;
+    document.querySelector(
+      'audio'
+    ).src = `../../../assets/${this.animalPath}.mp3`;
+    
+    this.animal = `${animals[animalSound]}`;
+
+    var element = document.querySelector(`.${this.animal}`);
+    console.log(element);
+    //var element = document.getElementsByClassName(`.${animal}`);
+    element.addEventListener('click', clickHandler);
+  };
+
+  startCounting() {
+    this.interval = setInterval(() => {
+      this.currentTimePassed++;
+    }, 100);
   }
+
+  stopCounting() {
+    clearInterval(this.interval);
+  }
+
 }

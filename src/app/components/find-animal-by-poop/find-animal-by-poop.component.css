@@ -1,0 +1,60 @@
+.background {
+  background-image: url("../../../assets/gifi/grass_flowers.png");
+  background-size: cover;
+  height: 100vh;
+  max-width: 100vw;
+  width: 100%;
+  background-position: center;
+  background-repeat: no-repeat;
+  left: 0;
+  top: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+    Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+}
+
+.changeAnimal {
+  content: url("../../../assets/pig/pig.png");
+}
+
+.row {
+  display: flex;
+}
+
+.column {
+  flex: 25%;
+  padding: 5px;
+}
+
+.poop_box {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  color: #742716;
+  font-size: 24px;
+  letter-spacing: 2px;
+  padding-top: 20px;
+  width: 30%;
+  height: 40%;
+  text-align: center;
+  transform: translate(-50%, -50%);
+  background-color: #b8666a;
+  border: 5px solid #b67b64;
+  border-radius: 15px;
+}
+
+.poop_img {
+  width: 200px;
+  height: 200px;
+}
+
+.poop {
+  left: 50%;
+  position: absolute;
+}
+
+.wrong {
+  left: 35%;
+  position: absolute;
+  background-color: #a3a37c;
+  top: 20%;
+}

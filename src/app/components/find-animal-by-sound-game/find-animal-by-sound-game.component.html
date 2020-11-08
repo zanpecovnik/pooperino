@@ -1,8 +1,8 @@
 
-<div id="testnidiv" class="test">
+<div class="background">
     <audio src="../../../assets/pig/pig.mp3" id="myAudio" volume="0.1" autoplay loop ></audio>
 
-    <div class="row ml-3">
+    <div class="row ml-30">
         <div class="column cat">
           <img src="../../../assets/cat/cat.png" alt="Snow" style="width:40%">
         </div>
@@ -16,6 +16,8 @@
             <img src="../../../assets/dog/dog.png" alt="Mountains" style="width:40%">
         </div>
     </div>
+
+
 
 
     <div class="row ml-3">
@@ -45,6 +47,5 @@
         </div>
     </div> 
 
-
-    
+    <div class="timeCounter">Time passed: {{ currentTimePassed / 10 | number : '1.1'}}</div>
   </div>
