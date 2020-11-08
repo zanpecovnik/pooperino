@@ -28,6 +28,10 @@ const routes: Routes = [
     path: 'guessPoop',
     component: FindAnimalByPoopComponent,
   },
+  { 
+    path: 'findAnimalBySound',
+    component: FindAnimalBySoundGameComponent,
+  },
 ];
 
 @NgModule({

@@ -1,0 +1,12 @@
+.changeAnimal{
+    content:url("../../../assets/pig/pig.png");
+}
+
+.row {
+    display: flex;
+  }
+  
+  .column {
+    flex: 25%;
+    padding: 5px;
+  }
