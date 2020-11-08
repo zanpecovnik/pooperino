@@ -17,7 +17,15 @@ const routes: Routes = [
     component: StartGamePopupComponent,
   },
   {
+    path: 'setup/:gameType',
+    component: StartGamePopupComponent,
+  },
+  {
     path: 'findAnimal',
+    component: FindAnimalGameComponent,
+  },
+  {
+    path: 'findAnimal/:gameId',
     component: FindAnimalGameComponent,
   },
   {
@@ -25,7 +33,15 @@ const routes: Routes = [
     component: FindAnimalByPoopComponent,
   },
   {
+    path: 'guessPoop/:gameId',
+    component: FindAnimalByPoopComponent,
+  },
+  {
     path: 'findAnimalBySound',
+    component: FindAnimalBySoundGameComponent,
+  },
+  {
+    path: 'findAnimalBySound/:gameId',
     component: FindAnimalBySoundGameComponent,
   },
 ];
