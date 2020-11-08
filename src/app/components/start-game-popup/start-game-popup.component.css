@@ -41,7 +41,9 @@ input[type="submit"] {
   color: brown;
   font-size: 30px;
   padding: 15px;
+  margin: 10px;
   width: 50%;
+  cursor: pointer;
 }
 
 input[type="text"],
@@ -63,4 +65,17 @@ select {
   font-size: 30px;
   margin-top: 30px;
   color: #b8666a;
+}
+
+.selectGameModeBtn {
+  border-radius: 5px;
+  border: 3px solid brown;
+  background-color: yellow;
+  color: brown;
+  font-size: 30px;
+  padding: 15px;
+  margin: 10px;
+  width: 45%;
+  cursor: pointer;
+  transition: all 0.3s ease;
 }

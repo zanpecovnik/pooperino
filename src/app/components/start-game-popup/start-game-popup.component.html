@@ -1,10 +1,12 @@
 <section class="background">
   <div class="popup">
-    <div class="info">FIND THE CHICKEN</div>
-    <form action="" class="form">
+    <div class="info">ENTER YOUR DATA</div>
+    <form class="form" (ngSubmit)="onFormSubmit()">
       <div class="name">Nickname:</div>
-      <input size="50" type="text" id="nickname" name="nickname" /> <br />
-      <input type="submit" value="Submit" />
+      <input size="50" type="text" id="nickname" name="nickname" [(ngModel)]="selectedPlayerName"/>
+      <input type="button" id="singlePlayerBtn" class="selectGameModeBtn" (click)="setSinglePlayerMode();" value="Singleplayer">
+      <input type="button" id="multiPlayerBtn" class="selectGameModeBtn" (click)="setMultiPlayerMode();" value="Multiplayer">
+      <input type="submit" value="Start game" />
     </form>
   </div>
 </section>
