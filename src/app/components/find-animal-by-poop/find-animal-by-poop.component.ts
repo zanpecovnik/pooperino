@@ -3,7 +3,7 @@ import { DOCUMENT } from '@angular/common';
 import { FirebaseService } from 'src/app/services/firebase.service';
 import * as $ from 'jquery';
 import games from 'src/app/constants/games';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-find-animal-by-poop',
@@ -44,7 +44,8 @@ export class FindAnimalByPoopComponent implements OnInit {
   constructor(
     @Inject(DOCUMENT) document,
     private firebaseService: FirebaseService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -163,6 +164,20 @@ export class FindAnimalByPoopComponent implements OnInit {
 
   stopCounting() {
     clearInterval(this.interval);
+  }
+
+  exitGame() {
+    console.log('Exit game');
+    this.router.navigate(['/']);
+  }
+
+  playAgain() {
+    console.log('Play again');
+    this.currentTimePassed = 0;
+    this.end_game = false;
+    this.correct = 0;
+    this.wrong.style.visibility = 'hidden';
+    this.ngOnInit();
   }
 
   shuffleArray = (array) => {
