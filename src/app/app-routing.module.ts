@@ -21,14 +21,10 @@ const routes: Routes = [
     component: FindAnimalGameComponent,
   },
   {
-    path: 'pickAnimal',
-    component: FindAnimalBySoundGameComponent,
-  },
-  {
     path: 'guessPoop',
     component: FindAnimalByPoopComponent,
   },
-  { 
+  {
     path: 'findAnimalBySound',
     component: FindAnimalBySoundGameComponent,
   },
