@@ -67,14 +67,8 @@ export class FindAnimalBySoundGameComponent implements OnInit {
     };
 
     const clickHandler = function() {
-      console.log("Animal: ", this.animal);
+      console.log("Animal found: ", this.animal);
       document.querySelector('audio').pause();
-      if (this.animal != undefined){
-        var element = document.querySelector(`.${this.animal}`);
-        console.log("lala", element);
-        element.classList.add('changeAnimal');
-        $(`.${this.animal}`).addClass('changeAnimal');
-      }
       this.correct = nextAnimal();
     };
 
@@ -86,6 +80,10 @@ export class FindAnimalBySoundGameComponent implements OnInit {
       console.log('Prev anial is: ' + this.animal);
       //var element = document.getElementsByClassName(`.${animal}`);
       element.removeEventListener('click', clickHandler);
+
+      //make gif
+      //element.classList.add('changeAnimal');
+      //$(`.${this.animal}`).addClass('changeAnimal');
 
       if (this.correct < this.counter) {
         console.log(this.correct);
@@ -131,13 +129,13 @@ export class FindAnimalBySoundGameComponent implements OnInit {
     element.addEventListener('click', clickHandler);
 
     //set eventListener for other animals
-    for(let i = 0; i < animals.length; i++){
+    /*for(let i = 0; i < animals.length; i++){
       if(i != animalSound){
         this.other_animal = `${animals[i]}`;
         var element = document.querySelector(`.${this.other_animal}`);
         element.addEventListener('click', clickOther.bind(this.other_animal));
       }
-    }
+    }*/
   };
 
   startCounting() {
