@@ -1,13 +1,4 @@
-<<<<<<< Updated upstream
-import {
-  Component,
-  Inject,
-  OnInit,
-  SystemJsNgModuleLoader,
-} from '@angular/core';
-=======
 import { Component, Inject, OnInit, ElementRef } from '@angular/core';
->>>>>>> Stashed changes
 import { FirebaseService } from 'src/app/services/firebase.service';
 import * as $ from 'jquery';
 import { nextTick } from 'process';
@@ -19,20 +10,12 @@ import { DOCUMENT } from '@angular/common';
   styleUrls: ['./find-animal-by-sound-game.component.css'],
 })
 export class FindAnimalBySoundGameComponent implements OnInit {
-  constructor(
-    @Inject(DOCUMENT) document,
-    private firebaseService: FirebaseService
-  ) {}
 
-<<<<<<< Updated upstream
-  public animals: String[];
-=======
   constructor(@Inject(DOCUMENT) document,
   private firebaseService: FirebaseService,
   private elRef: ElementRef) {}
 
   public animals : String[];
->>>>>>> Stashed changes
   animalPath: string;
   startTime;
   endTime;
@@ -57,37 +40,6 @@ export class FindAnimalBySoundGameComponent implements OnInit {
       'sheep',
       'elephant',
     ];
-<<<<<<< Updated upstream
-
-    const nextAnimal = () => {
-      console.log('im here');
-    };
-
-    $(document).ready(function () {
-      this.startTime = new Date().getTime();
-      console.log(this.startTime);
-
-      var animalSound = Math.floor(Math.random() * animals.length);
-      console.log(animalSound);
-
-      this.animalPath = `${animals[animalSound]}/${animals[animalSound]}`;
-      document.querySelector(
-        'audio'
-      ).src = `../../../assets/${this.animalPath}.mp3`;
-
-      var animal = `${animals[animalSound]}`;
-      console.log(animal);
-
-      $(`.${animal}`).click(function () {
-        this.correct += 1;
-        console.log(animal);
-        document.querySelector('audio').pause();
-        console.log('dela');
-        nextAnimal();
-      });
-    });
-  }
-=======
 
     this.startTime = new Date().getTime();
     this.startCounting();
@@ -157,5 +109,4 @@ export class FindAnimalBySoundGameComponent implements OnInit {
     clearInterval(this.interval);
   }
 
->>>>>>> Stashed changes
 }
