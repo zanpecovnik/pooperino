@@ -1,4 +1,9 @@
-import { Component, Inject, OnInit, SystemJsNgModuleLoader } from '@angular/core';
+import {
+  Component,
+  Inject,
+  OnInit,
+  SystemJsNgModuleLoader,
+} from '@angular/core';
 import { FirebaseService } from 'src/app/services/firebase.service';
 import * as $ from 'jquery';
 import { nextTick } from 'process';
@@ -10,18 +15,19 @@ import { DOCUMENT } from '@angular/common';
   styleUrls: ['./find-animal-by-sound-game.component.css'],
 })
 export class FindAnimalBySoundGameComponent implements OnInit {
+  constructor(
+    @Inject(DOCUMENT) document,
+    private firebaseService: FirebaseService
+  ) {}
 
-  constructor(@Inject(DOCUMENT) document,
-  private firebaseService: FirebaseService) {}
-
-  public animals : String[];
+  public animals: String[];
   animalPath: string;
   startTime;
   counter = 10;
   correct = 0;
 
-  ngOnInit() : void {
-    console.log("Starting");
+  ngOnInit(): void {
+    console.log('Starting');
     var animals = [
       'cat',
       'chicken',
@@ -35,10 +41,12 @@ export class FindAnimalBySoundGameComponent implements OnInit {
       'sheep',
       'elephant',
     ];
-    
 
-    $(document).ready(function() {
+    const nextAnimal = () => {
+      console.log('im here');
+    };
 
+    $(document).ready(function () {
       this.startTime = new Date().getTime();
       console.log(this.startTime);
 
@@ -49,23 +57,17 @@ export class FindAnimalBySoundGameComponent implements OnInit {
       document.querySelector(
         'audio'
       ).src = `../../../assets/${this.animalPath}.mp3`;
-      
+
       var animal = `${animals[animalSound]}`;
       console.log(animal);
 
-      $(`.${animal}`).click(
-        function(){
-          this.correct += 1;
-          console.log(animal);
-          document.querySelector('audio').pause();
-          this.nextAnimal();
-        }
-      )
+      $(`.${animal}`).click(function () {
+        this.correct += 1;
+        console.log(animal);
+        document.querySelector('audio').pause();
+        console.log('dela');
+        nextAnimal();
+      });
     });
   }
-
-  nextAnimal = () => {
-    console.log("im here");
-
-  };
 }

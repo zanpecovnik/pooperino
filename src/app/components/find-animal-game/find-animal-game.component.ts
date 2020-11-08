@@ -1,8 +1,8 @@
 import { DOCUMENT } from '@angular/common';
 import { Component, Inject, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import games from 'src/app/constants/games';
 import { FirebaseService } from 'src/app/services/firebase.service';
-// import { v4 as uuid } from 'uuid';
 
 @Component({
   selector: 'app-find-animal-game',
@@ -16,6 +16,7 @@ export class FindAnimalGameComponent implements OnInit {
   endTime;
   interval;
   currentTimePassed = 0;
+  playerName = '';
   animals = [
     'cat',
     'chicken',
@@ -31,10 +32,15 @@ export class FindAnimalGameComponent implements OnInit {
   ];
   constructor(
     @Inject(DOCUMENT) document,
-    private firebaseService: FirebaseService
+    private firebaseService: FirebaseService,
+    private route: ActivatedRoute
   ) {}
 
   ngOnInit(): void {
+    this.route.queryParams.subscribe((params) => {
+      this.playerName = params.playerName;
+    });
+
     this.startTime = new Date().getTime();
     this.startCounting();
     this.animals = this.shuffleArray(this.animals);
@@ -87,7 +93,7 @@ export class FindAnimalGameComponent implements OnInit {
       this.endTime = new Date().getTime();
       const timeNeeded = (this.endTime - this.startTime) / 1000;
 
-      this.getAndPossiblySetTop5('testPlayerName', timeNeeded);
+      this.getAndPossiblySetTop5(this.playerName, timeNeeded);
 
       this.stopCounting();
     };

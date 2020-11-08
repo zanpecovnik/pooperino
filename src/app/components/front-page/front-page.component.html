@@ -6,15 +6,15 @@
     </div>
     <div class="game1">
       <img src="../../../assets/gifi/poop.png" alt="POOP" class="poop" />
-      <button routerLink="/findAnimalBySound" class="game_btn">Guess that POOP</button>
+      <button [routerLink]="['/setup', 'findAnimalBySound']" class="game_btn">Match sound with POOPing animal</button>
     </div>
     <div class="game2">
       <img src="../../../assets/gifi/poop.png" alt="POOP" class="poop" />
-      <button routerLink="/findAnimal" class="game_btn">Hear that POOP</button>
+      <button [routerLink]="['/setup', 'findAnimal']" class="game_btn">Find magic POOPing animal</button>
     </div>
     <div class="game3">
       <img src="../../../assets/gifi/poop.png" alt="POOP" class="poop" />
-      <button ng-click="" class="game_btn">Pick that POOP</button>
+      <button [routerLink]="['/setup', 'guessPoop']" class="game_btn">Match POOP with animal</button>
     </div>
   </div>
 </section>
