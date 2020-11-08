@@ -1,7 +1,11 @@
-.changeAnimal{
-    content:url("../../../assets/elephant/elephant-gif.gif");
+:root {
+    --animalValue: '';
 }
 
+
+.changeAnimal{
+    content:url("../../../assets/pig/pig-gif.gif");
+}
 
 .animal-padding{
     padding: 50px;
