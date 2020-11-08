@@ -51,6 +51,8 @@ export class FindAnimalByPoopComponent implements OnInit {
       this.playerName = params.playerName;
     });
 
+    document.querySelector('audio').volume = 0.2;
+
     this.poop_box = document.getElementById('poop_box');
     this.poop = document.getElementById('poop');
     this.wrong = document.getElementById('wrong');
