@@ -28,7 +28,7 @@ export class FindAnimalBySoundGameComponent implements OnInit {
   startTime;
   endTime;
   interval;
-  counter = 5;
+  counter = 10;
   correct = 0;
   animal = '';
   currentTimePassed = 0;
@@ -67,14 +67,6 @@ export class FindAnimalBySoundGameComponent implements OnInit {
     this.startTime = new Date().getTime();
     this.startCounting();
 
-    const clickOther = function() {
-      var element = document.querySelector(`.${this.other_animal}`);
-      element.classList.add('changeAnimal');
-      $(`.${this.other_animal}`).addClass('changeAnimal');
-      
-      //this.correct = nextAnimal();
-    };
-
     const clickHandler = function() {
       console.log("Animal found: ", this.animal);
       document.querySelector('audio').pause();
@@ -87,19 +79,18 @@ export class FindAnimalBySoundGameComponent implements OnInit {
 
       var element = document.querySelector(`.${this.animal}`);
       console.log('Prev anial is: ' + this.animal);
-      //var element = document.getElementsByClassName(`.${animal}`);
       element.removeEventListener('click', clickHandler);
-
-      //make gif
-      this.wrong_img.src = `../../../assets/${this.animal}/${this.animal}-gif.gif`;
-      this.wrong.style.visibility = 'visible';
-      var currTime = new Date().getTime();
-      setTimeout(function(){
-        this.wrong.style.visibility = 'hidden';
-      }, 1000);
 
 
       if (this.correct < this.counter) {
+        //make gif
+        this.wrong_img.src = `../../../assets/${this.animal}/${this.animal}-gif.gif`;
+        this.wrong.style.visibility = 'visible';
+        var currTime = new Date().getTime();
+        setTimeout(function(){
+          this.wrong.style.visibility = 'hidden';
+        }, 1000);
+
         console.log(this.correct);
         var animalSound = Math.floor(Math.random() * animals.length);
         this.animalPath = `${animals[animalSound]}/${animals[animalSound]}`;
@@ -111,11 +102,9 @@ export class FindAnimalBySoundGameComponent implements OnInit {
         console.log('animal is: ' + this.animal);
         var element = document.querySelector(`.${this.animal}`);
         console.log(element);
-        //var element = document.getElementsByClassName(`.${animal}`);
         element.addEventListener('click', clickHandler);
       } else {
         this.end_game = true;
-        //$scope.end_game = true;
         console.log('End game');
         this.endTime = new Date().getTime();
         this.stopCounting();
@@ -139,17 +128,7 @@ export class FindAnimalBySoundGameComponent implements OnInit {
 
     var element = document.querySelector(`.${this.animal}`);
     console.log("Element is :", element);
-    //var element = document.getElementsByClassName(`.${animal}`);
     element.addEventListener('click', clickHandler);
-
-    //set eventListener for other animals
-    /*for(let i = 0; i < animals.length; i++){
-      if(i != animalSound){
-        this.other_animal = `${animals[i]}`;
-        var element = document.querySelector(`.${this.other_animal}`);
-        element.addEventListener('click', clickOther.bind(this.other_animal));
-      }
-    }*/
   };
 
   startCounting() {
@@ -187,8 +166,6 @@ export class FindAnimalBySoundGameComponent implements OnInit {
   playAgain() {
     console.log("Play again");
     this.ngOnInit();
-    //this.router.navigate(['/findAnimalBySound?playerName=', this.playerName]);
-    //this.router.navigate(['/findAnimalBySound'], { queryParams: {playerName: this.playerName}});
   }
 
 }
