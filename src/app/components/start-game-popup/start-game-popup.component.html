@@ -3,10 +3,11 @@
     <div class="info">ENTER YOUR DATA</div>
     <form class="form" (ngSubmit)="onFormSubmit()">
       <div class="name">Nickname:</div>
-      <input size="50" type="text" id="nickname" name="nickname" [(ngModel)]="selectedPlayerName"/>
+      <input size="50" autocomplete="off" type="text" id="nickname" name="nickname" [(ngModel)]="selectedPlayerName"/>
       <input type="button" id="singlePlayerBtn" class="selectGameModeBtn" (click)="setSinglePlayerMode();" value="Singleplayer">
       <input type="button" id="multiPlayerBtn" class="selectGameModeBtn" (click)="setMultiPlayerMode();" value="Multiplayer">
       <input type="submit" value="Start game" />
+      <div id="multiPlayerUrlDiv" class="multiplayerurl">Copy this url and send it to your friend so you can play together: {{multiPlayerUrl}}</div>
     </form>
   </div>
 </section>

@@ -7,4 +7,9 @@
     <audio autoplay loop></audio>
   </div>
   <div class="timeCounter">Time passed: {{ currentTimePassed / 10 | number : '1.1'}}</div>
+  <div class="poop_box" id="poop_box" *ngIf="end_game">
+    <p>Congratulations, you won the game!</p>
+    <button class="game_btn p-2" (click)="playAgain()">Play again</button>
+    <button class="game_btn" (click)="exitGame()">Exit</button>
+</div>
 </div>

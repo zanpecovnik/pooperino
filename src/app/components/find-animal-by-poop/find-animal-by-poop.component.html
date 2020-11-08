@@ -1,4 +1,9 @@
 <div class="background">
+  <div class="poop_box_end" id="poop_box" *ngIf="end_game">
+    <p>Your game has ended!</p>
+    <button class="game_btn p-2" (click)="playAgain()">Play again</button>
+    <button class="game_btn" (click)="exitGame()">Exit</button>
+  </div>
   <audio
     src="../../../assets/gifi/Old MacDonald Had A Farm - 3D Animation English Nursery Rhymes & Songs for children.mp3"
     loop
@@ -8,6 +13,7 @@
     Time passed: {{ currentTimePassed / 10 | number: "1.1" }}
   </div>
   <div class="correctCounter">Correct guesses: {{ correct }}</div>
+
   <div id="testnidiv" class="test">
     <div class="row ml-3">
       <div class="column cat">

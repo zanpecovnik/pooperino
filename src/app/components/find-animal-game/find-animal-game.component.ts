@@ -1,6 +1,6 @@
 import { DOCUMENT } from '@angular/common';
 import { Component, Inject, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import games from 'src/app/constants/games';
 import { FirebaseService } from 'src/app/services/firebase.service';
 
@@ -17,6 +17,7 @@ export class FindAnimalGameComponent implements OnInit {
   interval;
   currentTimePassed = 0;
   playerName = '';
+  end_game = false;
   animals = [
     'cat',
     'chicken',
@@ -33,7 +34,8 @@ export class FindAnimalGameComponent implements OnInit {
   constructor(
     @Inject(DOCUMENT) document,
     private firebaseService: FirebaseService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -93,6 +95,8 @@ export class FindAnimalGameComponent implements OnInit {
       this.endTime = new Date().getTime();
       const timeNeeded = (this.endTime - this.startTime) / 1000;
 
+      this.end_game = true;
+
       this.getAndPossiblySetTop5(this.playerName, timeNeeded);
 
       this.stopCounting();
@@ -128,6 +132,19 @@ export class FindAnimalGameComponent implements OnInit {
 
   ngOnDestroy() {
     document.onmousemove = (event) => {};
+  }
+
+  exitGame() {
+    console.log('Exit game');
+    this.router.navigate(['/']);
+  }
+
+  playAgain() {
+    console.log('Play again');
+    this.currentTimePassed = 0;
+    this.end_game = false;
+    document.getElementById('animalPic').style.opacity = '0';
+    this.ngOnInit();
   }
 
   shuffleArray = (array) => {

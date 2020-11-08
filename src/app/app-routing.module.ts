@@ -29,11 +29,11 @@ const routes: Routes = [
     component: FindAnimalGameComponent,
   },
   {
-    path: 'guessPoop',
+    path: 'findAnimalByPoop',
     component: FindAnimalByPoopComponent,
   },
   {
-    path: 'guessPoop/:gameId',
+    path: 'findAnimalByPoop/:gameId',
     component: FindAnimalByPoopComponent,
   },
   {
