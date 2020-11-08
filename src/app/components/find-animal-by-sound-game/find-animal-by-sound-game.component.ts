@@ -34,12 +34,18 @@ export class FindAnimalBySoundGameComponent implements OnInit {
   currentTimePassed = 0;
   playerName = '';
   end_game : Boolean = false;
+  wrong_img;
+  wrong;
 
   ngOnInit(): void {
     console.log('Starting');
     this.end_game = false;
     this.currentTimePassed = 0;
     this.correct = 0;
+
+    this.wrong = document.getElementById('wrong');
+    this.wrong_img = document.getElementById('wrong_img');
+
     var animals = [
       'cat',
       'chicken',
@@ -85,9 +91,13 @@ export class FindAnimalBySoundGameComponent implements OnInit {
       element.removeEventListener('click', clickHandler);
 
       //make gif
-      /*document.documentElement.style.setProperty('--animalValue', this.animal);
-      element.classList.add('changeAnimal');
-      $(`.${this.animal}`).addClass('changeAnimal');*/
+      this.wrong_img.src = `../../../assets/${this.animal}/${this.animal}-gif.gif`;
+      this.wrong.style.visibility = 'visible';
+      var currTime = new Date().getTime();
+      setTimeout(function(){
+        this.wrong.style.visibility = 'hidden';
+      }, 1000);
+
 
       if (this.correct < this.counter) {
         console.log(this.correct);
