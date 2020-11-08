@@ -28,8 +28,8 @@ export class FindAnimalBySoundGameComponent implements OnInit {
   startTime;
   endTime;
   interval;
-  counter = 10;
-  correct = 1;
+  counter = 5;
+  correct = 0;
   animal = '';
   currentTimePassed = 0;
   playerName = '';
@@ -37,6 +37,9 @@ export class FindAnimalBySoundGameComponent implements OnInit {
 
   ngOnInit(): void {
     console.log('Starting');
+    this.end_game = false;
+    this.currentTimePassed = 0;
+    this.correct = 0;
     var animals = [
       'cat',
       'chicken',
@@ -82,8 +85,9 @@ export class FindAnimalBySoundGameComponent implements OnInit {
       element.removeEventListener('click', clickHandler);
 
       //make gif
-      //element.classList.add('changeAnimal');
-      //$(`.${this.animal}`).addClass('changeAnimal');
+      /*document.documentElement.style.setProperty('--animalValue', this.animal);
+      element.classList.add('changeAnimal');
+      $(`.${this.animal}`).addClass('changeAnimal');*/
 
       if (this.correct < this.counter) {
         console.log(this.correct);
@@ -172,7 +176,9 @@ export class FindAnimalBySoundGameComponent implements OnInit {
 
   playAgain() {
     console.log("Play again");
-    this.router.navigate(['/findAnimalBySound?playerName=', this.playerName]);
+    this.ngOnInit();
+    //this.router.navigate(['/findAnimalBySound?playerName=', this.playerName]);
+    //this.router.navigate(['/findAnimalBySound'], { queryParams: {playerName: this.playerName}});
   }
 
 }
