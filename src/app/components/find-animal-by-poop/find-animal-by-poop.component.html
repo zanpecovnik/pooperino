@@ -1,4 +1,8 @@
 <div class="background">
+  <div class="timeCounter">
+    Time passed: {{ currentTimePassed / 10 | number: "1.1" }}
+  </div>
+  <div class="correctCounter">Correct guesses: {{ correct }}</div>
   <div id="testnidiv" class="test">
     <div class="row ml-3">
       <div class="column cat">
@@ -83,28 +87,16 @@
     </div>
   </div>
 
-  <div class="poop_box">
+  <div class="poop_box" id="poop_box">
     <p>Match the poop with the animal</p>
-    <img
-      class="poop_img"
-      src="../../../assets/cat/cat-poop.png"
-      alt="CAT POOP"
-    />
+    <img class="poop_img" id="poop_box_img" alt="CAT POOP" />
   </div>
 
-  <div class="poop">
-    <img
-      class="poop_img"
-      src="../../../assets/cat/cat-poop.png"
-      alt="CAT POOP"
-    />
+  <div class="poop" id="poop">
+    <img class="poop_img" id="poop_img" alt="CAT POOP" />
   </div>
 
-  <div class="wrong">
-    <img
-      class="poop_gif"
-      src="../../../assets/cat/cat-gif.gif"
-      alt="CAT POOPING"
-    />
+  <div class="wrong" id="wrong">
+    <img class="poop_gif" id="wrong_img" alt="CAT POOPING" />
   </div>
 </div>

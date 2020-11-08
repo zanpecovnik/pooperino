@@ -3,6 +3,8 @@ import { FirebaseService } from 'src/app/services/firebase.service';
 import * as $ from 'jquery';
 import { nextTick } from 'process';
 import { DOCUMENT } from '@angular/common';
+import games from 'src/app/constants/games';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-find-animal-by-sound-game',
@@ -10,20 +12,23 @@ import { DOCUMENT } from '@angular/common';
   styleUrls: ['./find-animal-by-sound-game.component.css'],
 })
 export class FindAnimalBySoundGameComponent implements OnInit {
+  constructor(
+    @Inject(DOCUMENT) document,
+    private firebaseService: FirebaseService,
+    private elRef: ElementRef,
+    private route: ActivatedRoute
+  ) {}
 
-  constructor(@Inject(DOCUMENT) document,
-  private firebaseService: FirebaseService,
-  private elRef: ElementRef) {}
-
-  public animals : String[];
+  public animals: String[];
   animalPath: string;
   startTime;
   endTime;
   interval;
   counter = 10;
   correct = 1;
-  animal = "";
+  animal = '';
   currentTimePassed = 0;
+  playerName = '';
 
   ngOnInit(): void {
     console.log('Starting');
@@ -41,10 +46,14 @@ export class FindAnimalBySoundGameComponent implements OnInit {
       'elephant',
     ];
 
+    this.route.queryParams.subscribe((params) => {
+      this.playerName = params.playerName;
+    });
+
     this.startTime = new Date().getTime();
     this.startCounting();
 
-    const clickHandler = function() {
+    const clickHandler = function () {
       console.log(this.animal);
       document.querySelector('audio').pause();
       $(`.${this.animal}`).addClass('changeAnimal');
@@ -56,11 +65,11 @@ export class FindAnimalBySoundGameComponent implements OnInit {
       this.correct += 1;
 
       var element = document.querySelector(`.${this.animal}`);
-      console.log("Prev anial is: " + this.animal);
+      console.log('Prev anial is: ' + this.animal);
       //var element = document.getElementsByClassName(`.${animal}`);
       element.removeEventListener('click', clickHandler);
 
-      if (this.correct < this.counter){
+      if (this.correct < this.counter) {
         console.log(this.correct);
         var animalSound = Math.floor(Math.random() * animals.length);
         this.animalPath = `${animals[animalSound]}/${animals[animalSound]}`;
@@ -69,19 +78,22 @@ export class FindAnimalBySoundGameComponent implements OnInit {
         ).src = `../../../assets/${this.animalPath}.mp3`;
 
         this.animal = `${animals[animalSound]}`;
-        console.log("animal is: " + this.animal);
+        console.log('animal is: ' + this.animal);
         var element = document.querySelector(`.${this.animal}`);
         console.log(element);
         //var element = document.getElementsByClassName(`.${animal}`);
         element.addEventListener('click', clickHandler);
       } else {
-        console.log("End game");
+        console.log('End game');
         this.endTime = new Date().getTime();
         this.stopCounting();
-        console.log("Needed time:", this.endTime - this.startTime);
+        console.log('Needed time:', this.endTime - this.startTime);
+        this.getAndPossiblySetTop5(
+          this.playerName,
+          (this.endTime - this.startTime) / 1000
+        );
       }
     };
-
 
     var animalSound = Math.floor(Math.random() * animals.length);
     console.log(animalSound);
@@ -90,14 +102,14 @@ export class FindAnimalBySoundGameComponent implements OnInit {
     document.querySelector(
       'audio'
     ).src = `../../../assets/${this.animalPath}.mp3`;
-    
+
     this.animal = `${animals[animalSound]}`;
 
     var element = document.querySelector(`.${this.animal}`);
     console.log(element);
     //var element = document.getElementsByClassName(`.${animal}`);
     element.addEventListener('click', clickHandler);
-  };
+  }
 
   startCounting() {
     this.interval = setInterval(() => {
@@ -109,4 +121,20 @@ export class FindAnimalBySoundGameComponent implements OnInit {
     clearInterval(this.interval);
   }
 
+  getAndPossiblySetTop5 = (playerName, timeNeeded) => {
+    this.firebaseService
+      .getTop5(games.MATCH_SOUND_GAME)
+      .subscribe((snapshot) => {
+        let top5 = snapshot.data().scoreboard;
+        top5.push({ name: playerName, time: timeNeeded });
+        top5.sort((x, y) => (x.time > y.time ? 1 : -1));
+
+        if (top5[5].time !== timeNeeded) {
+          this.firebaseService.setNewTop5(
+            top5.slice(0, 5),
+            games.MATCH_SOUND_GAME
+          );
+        }
+      });
+  };
 }
