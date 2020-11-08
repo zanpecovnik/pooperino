@@ -1,3 +1,10 @@
-<div id="animalPic" class="animal" [style.background-image]="'url(../../../assets/' + animalPath + '.png)'">
-  <audio autoplay loop ></audio>
+<div class="background">
+  <div
+    id="animalPic"
+    class="animal"
+    [style.background-image]="'url(../../../assets/' + animalPath + '.png)'"
+  >
+    <audio autoplay loop></audio>
+  </div>
+  <div class="timeCounter">Time passed: {{ currentTimePassed / 10 | number : '1.1'}}</div>
 </div>
